@@ -1,0 +1,25 @@
+# Directorios de construcción
+target/
+build/
+
+# Archivos generados por IDEs
+.idea/
+*.iml
+out/
+
+# Archivos específicos del entorno de desarrollo
+*.class
+*.log
+
+# Archivos de configuración del sistema
+*.swp
+.DS_Store
+Thumbs.db
+
+# Archivos temporales y de respaldo
+*.tmp
+*.bak
+
+# Dependencias locales de Maven y Gradle
+.m2/
+.gradle/
