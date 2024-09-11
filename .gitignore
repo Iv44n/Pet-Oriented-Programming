@@ -23,3 +23,6 @@ Thumbs.db
 # Dependencias locales de Maven y Gradle
 .m2/
 .gradle/
+
+# Variables de Entorno
+.env
