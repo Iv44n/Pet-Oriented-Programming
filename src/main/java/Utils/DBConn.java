@@ -1,4 +1,4 @@
-package App;
+package Utils;
 
 import java.sql.*;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -9,8 +9,9 @@ public class DBConn {
     private static final String DB_URL = dotenv.get("DB_URL");
     private static final String USER = dotenv.get("USER");
     private static final String PASSWORD = dotenv.get("PASSWORD");
-
     private static Connection conn;
+
+    public DBConn() {};
 
     public Connection getConnectionDb() {
         try {
