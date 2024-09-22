@@ -16,7 +16,7 @@ public class AnimalController {
         return animalService.findAll();
     }
 
-    public Animal getAnimalById (int id){
+    public Animal getAnimalById(int id) {
         return animalService.findById(id);
     }
 }

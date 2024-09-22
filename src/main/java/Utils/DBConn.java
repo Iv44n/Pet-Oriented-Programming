@@ -11,7 +11,8 @@ public class DBConn {
     private static final String PASSWORD = dotenv.get("PASSWORD");
     private static Connection conn;
 
-    public DBConn() {};
+    public DBConn() {
+    }
 
     public Connection getConnectionDb() {
         try {
