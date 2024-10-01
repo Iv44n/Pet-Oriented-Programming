@@ -12,11 +12,11 @@ public class AuthController {
         this.authService = new AuthService();
     }
 
-    public PersistentUser signIn() {
-        return authService.signInByEmail("username", "password");
+    public PersistentUser signIn(String email, String password) {
+        return authService.signInByEmail(email, password);
     }
 
-    public PersistentUser signUp() {
-        return authService.signUp(new UserForCreation("password", "first_name", "last_name", "username", "email", "phone", "address"));
+    public PersistentUser signUp(String first_name, String last_name, String username, String password, String email, String phone, String address) {
+        return authService.signUp(new UserForCreation(password, first_name, last_name, username, email, phone, address));
     }
 }
