@@ -6,7 +6,7 @@ import Views.Home.Dashboard;
 
 public class SignIn extends javax.swing.JFrame {
 
-    private AuthController authController;
+    private final AuthController authController;
 
     public SignIn() {
         initComponents();
@@ -14,8 +14,9 @@ public class SignIn extends javax.swing.JFrame {
         this.labelErrorEmail.setVisible(false);
         this.labelErrorPassword.setVisible(false);
     }
-
+    
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -150,7 +151,7 @@ public class SignIn extends javax.swing.JFrame {
         );
 
         pack();
-    }
+    }// </editor-fold>//GEN-END:initComponents
 
     private boolean validateEmail(String email) {
         if (email == null || email.isEmpty()) {
