@@ -89,10 +89,10 @@ public class AuthService {
                                 resultSet.getString("address")
                         );
                     } else {
-                        throw new RuntimeException("La contraseña es incorrecta");
+                        throw new RuntimeException("El correo o la contraseña es incorrecta");
                     }
                 } else {
-                    throw new RuntimeException("el usuario no existe");
+                    throw new RuntimeException("El correo o la contraseña es incorrecta");
                 }
             }
         } catch (SQLException e) {
