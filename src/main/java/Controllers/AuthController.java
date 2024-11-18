@@ -19,4 +19,8 @@ public class AuthController {
     public PersistentUser signUp(String first_name, String last_name, String username, String password, String email, String phone, String address) {
         return authService.signUp(new UserForCreation(password, first_name, last_name, username, email, phone, address));
     }
+
+    public boolean signOut() {
+        return authService.signOut();
+    }
 }
