@@ -88,16 +88,16 @@ public class AuthService {
                                 resultSet.getString("phone"),
                                 resultSet.getString("address")
                         );
-                    } else {
-                        throw new RuntimeException("El correo o la contraseña es incorrecta");
                     }
-                } else {
-                    throw new RuntimeException("El correo o la contraseña es incorrecta");
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
+        }
+
+        if (user == null) {
+            throw new RuntimeException("El correo o la contraseña es incorrecta");
         }
 
         return user;
