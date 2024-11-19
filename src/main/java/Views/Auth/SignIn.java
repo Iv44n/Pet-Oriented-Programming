@@ -207,6 +207,7 @@ public class SignIn extends javax.swing.JFrame {
             PersistentUser user = authController.signIn(email, password);
             this.setVisible(false);
             Dashboard dashboard = new Dashboard(user);
+            dashboard.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             dashboard.setVisible(true);
         } catch (Exception e) {
             showErrors(e.getMessage());
