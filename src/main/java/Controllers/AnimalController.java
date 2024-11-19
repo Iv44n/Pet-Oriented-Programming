@@ -19,4 +19,12 @@ public class AnimalController {
     public Animal getAnimalById(int id) {
         return animalService.findById(id);
     }
+
+    public List<Animal> getAnimalsByBreed(String breed) {
+        if (breed == null || breed.trim().isEmpty()) {
+            throw new IllegalArgumentException("La raza no puede estar vacia");
+        }
+
+        return animalService.findByBreed(breed);
+    }
 }
