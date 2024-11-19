@@ -46,6 +46,51 @@ public class AnimalService {
                 animals.add(animal);
             }
         } catch (SQLException e) {
+            System.err.println("Error al obtener animales: " + e.getMessage());
+        }
+
+        return animals;
+    }
+
+    public List<Animal> findByBreed(String breed) {
+        List<Animal> animals = new ArrayList<>();
+
+        // Verificar si la raza es nula o vacía
+        if (breed == null || breed.trim().isEmpty()) {
+            return animals; // Retorna lista vacía si el término de búsqueda es nulo o vacío
+        }
+
+        // Normaliza la entrada a minúsculas y quita espacios innecesarios
+        breed = breed.trim().toLowerCase();
+
+        // Consulta con LIKE para búsqueda incompleta
+        String sql = "SELECT * FROM animals WHERE LOWER(breed) LIKE ?";
+
+        try (Connection connection = conn.getConnectionDb(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            // Usar LIKE con comodines y búsqueda insensible a mayúsculas/minúsculas
+            String searchPattern = "%" + breed + "%";  // Usar minúsculas y comodines
+            preparedStatement.setString(1, searchPattern);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Animal animal = new Animal(
+                            resultSet.getInt(COLUMN_ID),
+                            resultSet.getString(COLUMN_NAME),
+                            resultSet.getString(COLUMN_TYPE),
+                            resultSet.getInt(COLUMN_AGE),
+                            resultSet.getString(COLUMN_BREED),
+                            resultSet.getString(COLUMN_SEX),
+                            resultSet.getFloat(COLUMN_WEIGHT),
+                            resultSet.getString(COLUMN_DESCRIPTION),
+                            resultSet.getString(COLUMN_STATUS),
+                            resultSet.getString(COLUMN_ADMISSION_DATE)
+                    );
+                    animals.add(animal);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar animales por raza: " + e.getMessage());
         }
 
         return animals;
@@ -74,6 +119,7 @@ public class AnimalService {
                 }
             }
         } catch (SQLException e) {
+            System.err.println("Error al obtener animal por ID: " + e.getMessage());
         }
 
         return animal;
