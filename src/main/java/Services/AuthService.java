@@ -2,8 +2,10 @@ package Services;
 
 import Models.User.PersistentUser;
 import Models.User.UserForCreation;
-import Utils.DBConn;
+
 import org.mindrot.jbcrypt.BCrypt;
+
+import Config.DBConn;
 
 import java.sql.*;
 
