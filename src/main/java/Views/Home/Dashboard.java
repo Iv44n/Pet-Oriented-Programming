@@ -24,6 +24,7 @@ public class Dashboard extends javax.swing.JFrame {
     private PersistentUser user;
     private final AnimalController animalController;
     private Timer timer;
+    private Animal selectedAnimal;
 
     public Dashboard(PersistentUser user) {
         this.user = user;
@@ -525,10 +526,13 @@ public class Dashboard extends javax.swing.JFrame {
                 return;
             }
 
-            animal.setSex(animal.getSex().equals("FEMALE") ? "Hembra" : "Macho");
-            animal.setType(animal.getType().equals("DOG") ? "Perro" : "Gato");
+            selectedAnimal = animal;
+            
+            Animal updatedAnimal = new Animal(animal.getId(), animal.getName(), animal.getType(), animal.getAge(), animal.getBreed(), animal.getSex(), animal.getWeight(), animal.getDescription(), animal.getAdoptionStatus(), animal.getDateOfAdmission());
+            updatedAnimal.setType(animal.getType().equals("DOG") ? "Perro" : "Gato");
+            updatedAnimal.setSex(animal.getSex().equals("FEMALE") ? "Hembra" : "Macho");
 
-            SwingUtilities.invokeLater(() -> updateAnimalLabels(animal));
+            SwingUtilities.invokeLater(() -> updateAnimalLabels(updatedAnimal));
 
         } catch (Exception e) {
             SwingUtilities.invokeLater(this::clearLabels);
@@ -549,7 +553,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_petsBtnActionPerformed
 
     private void continueAdoptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueAdoptionBtnActionPerformed
-        // TODO add your handling code here:
+        new ConfirmAdoption(selectedAnimal, user).setVisible(true);
     }//GEN-LAST:event_continueAdoptionBtnActionPerformed
 
     private void adoptIdInputKeyTyped(java.awt.event.KeyEvent evt) {
