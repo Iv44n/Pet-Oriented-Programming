@@ -27,4 +27,8 @@ public class AnimalController {
 
         return animalService.findByBreed(breed);
     }
+
+    public boolean saveAnimalAdopted(int animalId, int userId, String observations) {
+        return animalService.saveAnimalAdopted(animalId, userId, observations);
+    }
 }
