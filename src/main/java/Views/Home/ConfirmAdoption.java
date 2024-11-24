@@ -285,8 +285,7 @@ public class ConfirmAdoption extends javax.swing.JFrame {
     private void initConfig() {
 
         animal.setSex(animal.getSex().equals("FEMALE") ? "Hembra" : "Macho");
-            animal.setType(animal.getType().equals("DOG") ? "Perro" : "Gato");
-
+        animal.setType(animal.getType().equals("DOG") ? "Perro" : "Gato");
 
         nameConfirm.setText(animal.getName());
         ageConfirm.setText(animal.getAge() + " años");

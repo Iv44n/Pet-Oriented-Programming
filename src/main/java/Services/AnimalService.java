@@ -126,43 +126,42 @@ public class AnimalService {
         return animal;
     }
 
-public boolean saveAnimalAdopted(int animalId, int userId, String observations) {
-    String updateAnimalSql = "UPDATE animals SET status = 'ADOPTED' WHERE id = ?";
-    String insertAdoptionSql = "INSERT INTO adoptions (animal_id, user_id, adoption_date, observations) VALUES (?, ?, ?, ?)";
-    boolean result = false;
+    public boolean saveAnimalAdopted(int animalId, int userId, String observations) {
+        String updateAnimalSql = "UPDATE animals SET status = 'ADOPTED' WHERE id = ?";
+        String insertAdoptionSql = "INSERT INTO adoptions (animal_id, user_id, adoption_date, observations) VALUES (?, ?, ?, ?)";
+        boolean result = false;
 
-    try (Connection connection = conn.getConnectionDb()) {
-        // Desactivar el autocommit para realizar ambas operaciones dentro de una transacción
-        connection.setAutoCommit(false);
+        try (Connection connection = conn.getConnectionDb()) {
+            // Desactivar el autocommit para realizar ambas operaciones dentro de una transacción
+            connection.setAutoCommit(false);
 
-        try (PreparedStatement updateAnimalStatement = connection.prepareStatement(updateAnimalSql);
-             PreparedStatement insertAdoptionStatement = connection.prepareStatement(insertAdoptionSql)) {
-            
-            // Actualizar el estado del animal
-            updateAnimalStatement.setInt(1, animalId);
-            updateAnimalStatement.executeUpdate();
+            try (PreparedStatement updateAnimalStatement = connection.prepareStatement(updateAnimalSql); PreparedStatement insertAdoptionStatement = connection.prepareStatement(insertAdoptionSql)) {
 
-            // Insertar el registro en la tabla de adopciones
-            insertAdoptionStatement.setInt(1, animalId);
-            insertAdoptionStatement.setInt(2, userId);
-            insertAdoptionStatement.setDate(3, Date.valueOf(LocalDate.now()));  // Fecha actual
-            insertAdoptionStatement.setString(4, observations);
-            insertAdoptionStatement.executeUpdate();
+                // Actualizar el estado del animal
+                updateAnimalStatement.setInt(1, animalId);
+                updateAnimalStatement.executeUpdate();
 
-            // Confirmar la transacción
-            connection.commit();
-            result = true;
+                // Insertar el registro en la tabla de adopciones
+                insertAdoptionStatement.setInt(1, animalId);
+                insertAdoptionStatement.setInt(2, userId);
+                insertAdoptionStatement.setDate(3, Date.valueOf(LocalDate.now()));  // Fecha actual
+                insertAdoptionStatement.setString(4, observations);
+                insertAdoptionStatement.executeUpdate();
+
+                // Confirmar la transacción
+                connection.commit();
+                result = true;
+            } catch (SQLException e) {
+                // Si hay algún error, revertir la transacción
+                connection.rollback();
+                System.err.println("Error al guardar la adopción: " + e.getMessage());
+                result = false;
+            }
+            return result;
         } catch (SQLException e) {
-            // Si hay algún error, revertir la transacción
-            connection.rollback();
-            System.err.println("Error al guardar la adopción: " + e.getMessage());
-            result = false;
+            System.err.println("Error al actualizar el estado del animal: " + e.getMessage());
+            return false;
         }
-        return result; 
-    } catch (SQLException e) {
-        System.err.println("Error al actualizar el estado del animal: " + e.getMessage());
-        return false;
     }
-}
 
 }

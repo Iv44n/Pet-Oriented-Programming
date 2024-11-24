@@ -527,7 +527,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
 
             selectedAnimal = animal;
-            
+
             Animal updatedAnimal = new Animal(animal.getId(), animal.getName(), animal.getType(), animal.getAge(), animal.getBreed(), animal.getSex(), animal.getWeight(), animal.getDescription(), animal.getAdoptionStatus(), animal.getDateOfAdmission());
             updatedAnimal.setType(animal.getType().equals("DOG") ? "Perro" : "Gato");
             updatedAnimal.setSex(animal.getSex().equals("FEMALE") ? "Hembra" : "Macho");
