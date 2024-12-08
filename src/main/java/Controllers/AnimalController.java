@@ -1,15 +1,16 @@
 package Controllers;
 
-import Services.AnimalService;
 import Models.Animal;
 import java.util.List;
 
+import Dao.AnimalDao;
+
 public class AnimalController {
 
-    private final AnimalService animalService;
+    private final AnimalDao animalService;
 
     public AnimalController() {
-        this.animalService = new AnimalService();
+        this.animalService = new AnimalDao();
     }
 
     public List<Animal> getAllAnimals() {

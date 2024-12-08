@@ -1,15 +1,15 @@
 package Controllers;
 
+import Dao.AuthDao;
 import Models.User.PersistentUser;
 import Models.User.UserForCreation;
-import Services.AuthService;
 
 public class AuthController {
 
-    private final AuthService authService;
+    private final AuthDao authService;
 
     public AuthController() {
-        this.authService = new AuthService();
+        this.authService = new AuthDao();
     }
 
     public PersistentUser signIn(String email, String password) {
