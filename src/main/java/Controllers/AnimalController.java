@@ -18,6 +18,10 @@ public class AnimalController {
     }
 
     public Animal getAnimalById(int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("El id debe ser mayor a 0");
+        }
+
         return animalService.findById(id);
     }
 
@@ -30,6 +34,10 @@ public class AnimalController {
     }
 
     public boolean saveAnimalAdopted(int animalId, int userId, String observations) {
+        if (animalId <= 0 || userId <= 0) {
+            throw new IllegalArgumentException("Los parámetros deben ser mayores a 0 y la observación no puede estar vacia");
+        }
+
         return animalService.saveAnimalAdopted(animalId, userId, observations);
     }
 }
