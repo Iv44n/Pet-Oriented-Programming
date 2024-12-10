@@ -18,6 +18,12 @@ public class AuthController {
         return authService.signInByEmail(email, password);
     }
 
+    public PersistentUser signInAsAdmin(String email, String password) {
+        validateNotEmpty(email, "El correo");
+        validateNotEmpty(password, "La contraseña");
+        return authService.signInAsAdmin(email, password);
+    }
+
     public PersistentUser signUp(String firstName, String lastName, String username, String password,
             String email, String phone, String address) {
 

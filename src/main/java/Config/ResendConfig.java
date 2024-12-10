@@ -65,7 +65,7 @@ public class ResendConfig {
                 .from(RESEND_DOMAIN)
                 .to(email)
                 .subject("Gracias por adoptar a " + animalName)
-                .text("Gracias por adoptar a " + animalName) // fallback in case HTML is not supported
+                .text("Gracias por adoptar a " + animalName)
                 .html(htmlContent)
                 .build();
 
