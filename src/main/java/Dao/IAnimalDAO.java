@@ -15,7 +15,7 @@ public interface IAnimalDAO {
 
   Animal findById(int id, String status);
 
-  List<Animal> findByType(String type);
+  List<Animal> findByType(String type, String status);
 
   boolean saveAnimalAdopted(int animalId, int userId, String observations);
 

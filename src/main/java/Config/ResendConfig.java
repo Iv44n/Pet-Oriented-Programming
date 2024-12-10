@@ -11,6 +11,7 @@ public class ResendConfig {
     private static final Dotenv dotenv = Dotenv.load();
     private static final String RESEND_API_KEY = dotenv.get("RESEND_API_KEY");
     private static final String RESEND_DOMAIN = dotenv.get("RESEND_DOMAIN");
+    private static final String JAVA_ENV = dotenv.get("JAVA_ENV");
 
     public ResendConfig() {
         this.resend = new Resend(RESEND_API_KEY);
@@ -62,8 +63,8 @@ public class ResendConfig {
                 + "</html>";
 
         CreateEmailOptions params = CreateEmailOptions.builder()
-                .from(RESEND_DOMAIN)
-                .to(email)
+                .from(JAVA_ENV == "prod" ? RESEND_DOMAIN : "Acme <onboarding@resend.dev>")
+                .to(JAVA_ENV == "prod" ? email : "delivered@resend.dev")
                 .subject("Gracias por adoptar a " + animalName)
                 .text("Gracias por adoptar a " + animalName)
                 .html(htmlContent)

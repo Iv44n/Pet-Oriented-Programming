@@ -241,7 +241,7 @@ public class SignIn extends javax.swing.JFrame {
             PersistentUser user;
 
             if (checkBoxAdmin.isSelected()) {
-                user = authController.signInAsAdmin(email, password); // Iniciar sesión como admin
+                 user = authController.signInAsAdmin(email, password); // Iniciar sesión como admin
             } else {
                 user = authController.signIn(email, password); // Iniciar sesión como usuario normal
             }

@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.ObjectInputFilter.Status;
 import java.util.List;
 
 import Dao.AnimalDao;
@@ -38,12 +39,12 @@ public class AnimalController {
         return animalService.findByBreed(breed, type, status);
     }
 
-    public List<Animal> getAnimalsByType(String type) {
+    public List<Animal> getAnimalsByType(String type, String status) {
         if (type == null || type.trim().isEmpty()) {
             throw new IllegalArgumentException("El tipo no puede estar vacio");
         }
 
-        return animalService.findByType(type);
+        return animalService.findByType(type, status);
     }
 
     public boolean saveAnimalAdopted(int animalId, int userId, String observations) {

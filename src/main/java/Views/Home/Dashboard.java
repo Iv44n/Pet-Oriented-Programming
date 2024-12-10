@@ -638,7 +638,6 @@ public class Dashboard extends javax.swing.JFrame {
         }
 
         new ConfirmAdoption(selectedAnimal, user, this::refreshTable).setVisible(true);
-        ;
     }// GEN-LAST:event_continueAdoptionBtnActionPerformed
 
     private void refreshTable() {
@@ -650,13 +649,13 @@ public class Dashboard extends javax.swing.JFrame {
     private void adoptIdInputKeyTyped(java.awt.event.KeyEvent evt) {
         String query = adoptIdInput.getText() + evt.getKeyChar();
 
-        if (timer != null) {
-            timer.cancel();
+        if (query.trim().isEmpty()) {
+                clearLabels();
+                return;
         }
 
-        if (query.trim().isEmpty()) {
-            clearLabels();
-            return;
+        if (timer != null) {
+            timer.cancel();
         }
 
         timer = new Timer();

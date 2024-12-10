@@ -220,13 +220,21 @@ public class AnimalDao implements IAnimalDAO {
     }
 
     @Override
-    public List<Animal> findByType(String type) {
+    public List<Animal> findByType(String type, String status) {
         List<Animal> animals = new ArrayList<>();
-        String sql = "SELECT * FROM animals WHERE animal_type = ? AND adoption_status = 'IN ADOPTION'";
+        String sql = "SELECT * FROM animals WHERE animal_type = ?";
+
+        if (status != null && !status.trim().isEmpty()) {
+            sql += " AND adoption_status = ?";
+        }
 
         try (Connection connection = conn.getConnectionDb();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, type);
+
+            if (status != null && !status.trim().isEmpty()) {
+                preparedStatement.setString(2, status);
+            }
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
