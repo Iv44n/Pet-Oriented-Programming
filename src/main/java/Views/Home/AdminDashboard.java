@@ -898,10 +898,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         String query = EIdTextField.getText();
         Animal beforeAnimal = null;
 
-        if (timer != null) {
-            timer.cancel();
-        }
-
         if (query.trim().isEmpty()) {
             clearAnimalUpdateForm();
             return;
